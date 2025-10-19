@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: odoo
+    env: docker
+    plan: starter
+    disk:
+      name: odoo-data
+      mountPath: /data
+      sizeGB: 5
+    envVars:
+      - key: PGHOST
+        fromDatabase:
+          name: odoo-db
+          property: host
+      - key: PGPORT
+        fromDatabase:
+          name: odoo-db
+          property: port
+      - key: PGUSER
+        fromDatabase:
+          name: odoo-db
+          property: user
+      - key: PGPASSWORD
+        fromDatabase:
+          name: odoo-db
+          property: password
+      - key: PGDATABASE
+        fromDatabase:
+          name: odoo-db
+          property: database
+      - key: ADMIN_PASSWD
+        generateValue: true
+    autoDeploy: true
+
+databases:
+  - name: odoo-db
+    databaseName: odoo
+    user: odoo
