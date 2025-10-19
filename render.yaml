@@ -2,11 +2,7 @@ services:
   - type: web
     name: odoo
     env: docker
-    plan: starter
-    disk:
-      name: odoo-data
-      mountPath: /data
-      sizeGB: 5
+    plan: free
     envVars:
       - key: PGHOST
         fromDatabase:
@@ -30,7 +26,6 @@ services:
           property: database
       - key: ADMIN_PASSWD
         generateValue: true
-    autoDeploy: true
 
 databases:
   - name: odoo-db
